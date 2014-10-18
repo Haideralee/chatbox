@@ -96,7 +96,6 @@ i.red.icon {
 }
 .border_radiue{border-radius: 10px;}
 
-.chatbox_ul::-webkit-scrollbar,
 .chatbox_ul::-webkit-scrollbar {
     width: 5px;
 }
