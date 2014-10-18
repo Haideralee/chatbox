@@ -14,7 +14,7 @@ angular.module('todoApp', [])
         $scope.text = '';
 
         $scope.addItem = function(){
-            if(!$scope.text) return;
+            if(!$scope.text || $scope.text.length >= 121) return;
 
             $scope.chat.push({text : $scope.text, sender:'user2'});
             $scope.text = '';
