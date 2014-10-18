@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Chatbox with Angular.js</title>
+    <script src="js/angular.min.js"></script>
+    <script src="js/semantic.js"></script>
+    <script src="js/main.js"></script>
+    <link rel="stylesheet" href="css/semantic.css" />
+    <link rel="stylesheet" href="css/css.css" />
+    <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <div class="app_wrapper">
+        <h4 class="ui inverted teal block header large_font border_radiue">
+            Chatbox with Angular.js
+        </h4>
+        <div ng-controller="ChatOneController">
+            <div class=" chatbox_one ui teal segment ui stacked segment">
+                <div class="ui piled segment ui  form segment">
+                    <div class="ui ribbon teal label bottom_space left_float google_font">
+                        <h2>Chat</h2>
+                    </div>
+                    <div class="img_box">
+                        <img src="images/user1.jpg">
+                    </div>
+                    <ul class="ui list chatbox_ul ">
+                        <li ng-repeat="message in chat" class="chat_li">
+                            <div class="img_box left_float">
+                                <img src="{{message.sender === 'user1' ? 'images/user1.jpg' : 'images/user2.jpg'}}">
+                            </div>
+                            <div class="data_li teal ui pointing left label">
+                                <h4>{{message.sender}} </h4>
+                                <p class="text">{{message.text}}</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <form ng-submit="addItem()" class="ui reply form ">
+                    <div class="ui left icon input field" ng-class="{error : text.length >= 121}">
+                        <input type="text" ng-model="text" class="ui input" placeholder="chat" >
+                        <i class="chat icon teal"  ng-class="{red : text.length >= 121}"></i>
+                    </div>
+                    <div class="ui teal label right_float google_font">
+                        {{text.length}} of 120
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div ng-controller="ChatTwoController">
+            <div class=" chatbox_two ui teal segment ui stacked segment">
+                <div class="ui piled segment ui  form segment">
+                    <div class="ui ribbon teal label bottom_space left_float google_font">
+                        <h2>Chat</h2>
+                    </div>
+                    <div class="img_box">
+                        <img src="images/user2.jpg">
+                    </div>
+                    <ul class="ui list chatbox_ul">
+                        <li ng-repeat="message in chat" class="chat_li">
+                            <div class="img_box left_float">
+                                <img src="{{message.sender === 'user2' ? 'images/user2.jpg' : 'images/user1.jpg'}}">
+                            </div>
+                            <div class="data_li teal ui pointing left label">
+                                <h4>{{message.sender}} </h4>
+                                <p class="text">{{message.text}}</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <form ng-submit="addItem()" class="ui reply form ">
+                    <div class="ui left icon input field" ng-class="{error : text.length >= 121}">
+                        <input type="text" ng-model="text" class="ui input" placeholder="chat" >
+                        <i class="chat icon teal"  ng-class="{red : text.length >= 121}"></i>
+                    </div>
+                    <div class="ui teal label right_float google_font">
+                        {{text.length}} of 120
+                    </div>
+                </form>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
