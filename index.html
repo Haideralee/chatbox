@@ -36,7 +36,7 @@
                         </li>
                     </ul>
                 </div>
-                <form ng-submit="addItem()" class="ui reply form ">
+                <form ng-submit="emmitMessageChatOne()" class="ui reply form ">
                     <div class="ui left icon input field" ng-class="{error : text.length >= 121}">
                         <input type="text" ng-model="text" class="ui input" placeholder="chat" >
                         <i class="chat icon teal"  ng-class="{red : text.length >= 121}"></i>
@@ -68,7 +68,7 @@
                         </li>
                     </ul>
                 </div>
-                <form ng-submit="addItem()" class="ui reply form ">
+                <form ng-submit="emmitMessageChatTwo()" class="ui reply form ">
                     <div class="ui left icon input field" ng-class="{error : text.length >= 121}">
                         <input type="text" ng-model="text" class="ui input" placeholder="chat" >
                         <i class="chat icon teal"  ng-class="{red : text.length >= 121}"></i>
