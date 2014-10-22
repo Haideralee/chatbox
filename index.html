@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Chatbox with Angular.js</title>
     <script src="js/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="js/semantic.js"></script>
     <script src="js/main.js"></script>
     <link rel="stylesheet" href="css/semantic.css" />
@@ -15,71 +16,211 @@
         <h4 class="ui inverted teal block header large_font border_radiue">
             Chatbox with Angular.js
         </h4>
-        <div ng-controller="ChatOneController">
-            <div class=" chatbox_one ui teal segment ui stacked segment">
-                <div class="ui piled segment ui  form segment">
-                    <div class="ui ribbon teal label bottom_space left_float google_font">
-                        <h2>Chat</h2>
+        <!---- parentController start from here ---->
+        <div ng-controller="parentController">
+            <!---- ChatOneController start from here ---->
+            <div ng-controller="ChatOneController">
+                <div class=" chatbox_one ui teal segment ui stacked segment">
+                    <div class="ui piled segment ui  form segment">
+                        <div class="ui ribbon teal label bottom_space left_float google_font">
+                            <h2>Chat</h2>
+                        </div>
+                        <div class="img_box">
+                            <img src="images/user1.jpg">
+                        </div>
+                        <!--Chat with all loop start from here-->
+                        <ul class="ui list chatbox_ul" ng-if="receiver === 'all' || receiver === ''">
+                            <li ng-repeat="message in chat" class="chat_li">
+                                <div class="img_box left_float">
+                                    <img src="{{message.sender === 'user1' ? 'images/user1.jpg' : message.sender === 'user2' ? 'images/user2.jpg' : 'images/user3.jpg';}}">
+                                </div>
+                                <div class="data_li teal ui pointing left label">
+                                    <h4>{{message.sender}} </h4>
+                                    <p class="text_message">{{message.text}}</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <!--Chat with all loop end here-->
+                        <!--Chat with user2 loop start from here-->
+                        <ul class="ui list chatbox_ul" ng-if="receiver === 'user2'">
+                            <li ng-repeat="message in u1ndu2" class="chat_li">
+                                <div class="img_box left_float">
+                                    <img src="{{message.sender === 'user1' ? 'images/user1.jpg' : message.sender === 'user2' ? 'images/user2.jpg' : 'images/user3.jpg';}}">
+                                </div>
+                                <div class="data_li teal ui pointing left label">
+                                    <h4>{{message.sender}} </h4>
+                                    <p class="text_message">{{message.text}}</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <!--Chat with user2 loop end here-->
+                        <!--Chat with user3 loop start from here-->
+                        <ul class="ui list chatbox_ul" ng-if="receiver === 'user3'">
+                            <li ng-repeat="message in u1ndu3" class="chat_li">
+                                <div class="img_box left_float">
+                                    <img src="{{message.sender === 'user1' ? 'images/user1.jpg' : message.sender === 'user2' ? 'images/user2.jpg' : 'images/user3.jpg';}}">
+                                </div>
+                                <div class="data_li teal ui pointing left label">
+                                    <h4>{{message.sender}} </h4>
+                                    <p class="text_message">{{message.text}}</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <!--Chat with user3 loop end here-->
                     </div>
-                    <div class="img_box">
-                        <img src="images/user1.jpg">
-                    </div>
-                    <ul class="ui list chatbox_ul ">
-                        <li ng-repeat="message in chat" class="chat_li">
-                            <div class="img_box left_float">
-                                <img src="{{message.sender === 'user1' ? 'images/user1.jpg' : 'images/user2.jpg'}}">
-                            </div>
-                            <div class="data_li teal ui pointing left label">
-                                <h4>{{message.sender}} </h4>
-                                <p class="text">{{message.text}}</p>
-                            </div>
-                        </li>
-                    </ul>
+                    <form ng-submit="emmitMessageChatOne()" class="ui reply form ">
+                        <div class="ui left icon input field" ng-class="{error : text.length >= 121}">
+                            <input type="text" ng-model="text" class="ui input" placeholder="chat" >
+                            <i class="chat icon teal"  ng-class="{red : text.length >= 121}"></i>
+                        </div>
+                        <select class="ui selection dropdown" ng-model="receiver" ng-change="change()">
+                            <option value="all">Group Chat</option>
+                            <option value="user2">Chat with user2</option>
+                            <option value="user3">Chat with user3</option>
+                        </select>
+                        <div class="ui teal label right_float google_font">
+                            {{text.length}} of 120
+                        </div>
+                    </form>
                 </div>
-                <form ng-submit="emmitMessageChatOne()" class="ui reply form ">
-                    <div class="ui left icon input field" ng-class="{error : text.length >= 121}">
-                        <input type="text" ng-model="text" class="ui input" placeholder="chat" >
-                        <i class="chat icon teal"  ng-class="{red : text.length >= 121}"></i>
-                    </div>
-                    <div class="ui teal label right_float google_font">
-                        {{text.length}} of 120
-                    </div>
-                </form>
             </div>
-        </div>
-        <div ng-controller="ChatTwoController">
-            <div class=" chatbox_two ui teal segment ui stacked segment">
-                <div class="ui piled segment ui  form segment">
-                    <div class="ui ribbon teal label bottom_space left_float google_font">
-                        <h2>Chat</h2>
+            <!---- ChatOneController End here ---->
+            <!---- ChatTwoController start from here ---->
+            <div ng-controller="ChatTwoController">
+                <div class=" chatbox_two ui teal segment ui stacked segment">
+                    <div class="ui piled segment ui  form segment">
+                        <div class="ui ribbon teal label bottom_space left_float google_font">
+                            <h2>Chat</h2>
+                        </div>
+                        <div class="img_box">
+                            <img src="images/user2.jpg">
+                        </div>
+                        <!--Chat with all loop start from here-->
+                        <ul class="ui list chatbox_ul" ng-if="receiver === 'all' || receiver === ''">
+                            <li ng-repeat="message in chat" class="chat_li">
+                                <div class="img_box left_float">
+                                    <img src="{{message.sender === 'user1' ? 'images/user1.jpg' : message.sender === 'user2' ? 'images/user2.jpg' : 'images/user3.jpg';}}">
+                                </div>
+                                <div class="data_li teal ui pointing left label">
+                                    <h4>{{message.sender}} </h4>
+                                    <p class="text_message">{{message.text}}</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <!--Chat with all loop end here-->
+                        <!--Chat with user1 loop start from here-->
+                        <ul class="ui list chatbox_ul" ng-if="receiver === 'user1'">
+                            <li ng-repeat="message in u2ndu1" class="chat_li">
+                                <div class="img_box left_float">
+                                    <img src="{{message.sender === 'user1' ? 'images/user1.jpg' : message.sender === 'user2' ? 'images/user2.jpg' : 'images/user3.jpg';}}">
+                                </div>
+                                <div class="data_li teal ui pointing left label">
+                                    <h4>{{message.sender}} </h4>
+                                    <p class="text_message">{{message.text}}</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <!--Chat with user1 loop end here-->
+                        <!--Chat with user3 loop start from here-->
+                        <ul class="ui list chatbox_ul" ng-if="receiver === 'user3'">
+                            <li ng-repeat="message in u2ndu3" class="chat_li">
+                                <div class="img_box left_float">
+                                    <img src="{{message.sender === 'user1' ? 'images/user1.jpg' : message.sender === 'user2' ? 'images/user2.jpg' : 'images/user3.jpg';}}">
+                                </div>
+                                <div class="data_li teal ui pointing left label">
+                                    <h4>{{message.sender}} </h4>
+                                    <p class="text_message">{{message.text}}</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <!--Chat with user3 loop end here-->
                     </div>
-                    <div class="img_box">
-                        <img src="images/user2.jpg">
-                    </div>
-                    <ul class="ui list chatbox_ul">
-                        <li ng-repeat="message in chat" class="chat_li">
-                            <div class="img_box left_float">
-                                <img src="{{message.sender === 'user2' ? 'images/user2.jpg' : 'images/user1.jpg'}}">
-                            </div>
-                            <div class="data_li teal ui pointing left label">
-                                <h4>{{message.sender}} </h4>
-                                <p class="text">{{message.text}}</p>
-                            </div>
-                        </li>
-                    </ul>
+                    <form ng-submit="emmitMessageChatTwo()" class="ui reply form ">
+                        <div class="ui left icon input field" ng-class="{error : text.length >= 121}">
+                            <input type="text" ng-model="text" class="ui input" placeholder="chat" >
+                            <i class="chat icon teal"  ng-class="{red : text.length >= 121}"></i>
+                        </div>
+                        <select class="ui selection dropdown" ng-model="receiver" ng-change="change()">
+                            <option value="all">Group Chat</option>
+                            <option value="user1">Chat with user1</option>
+                            <option value="user3">Chat with user3</option>
+                        </select>
+                        <div class="ui teal label right_float google_font">
+                            {{text.length}} of 120
+                        </div>
+                    </form>
                 </div>
-                <form ng-submit="emmitMessageChatTwo()" class="ui reply form ">
-                    <div class="ui left icon input field" ng-class="{error : text.length >= 121}">
-                        <input type="text" ng-model="text" class="ui input" placeholder="chat" >
-                        <i class="chat icon teal"  ng-class="{red : text.length >= 121}"></i>
-                    </div>
-                    <div class="ui teal label right_float google_font">
-                        {{text.length}} of 120
-                    </div>
-                </form>
-                </form>
             </div>
+            <!---- ChatTwoController End here ---->
+            <!---- ChatThreeController start from here ---->
+            <div ng-controller="ChatThreeController">
+                <div class=" chatbox_two ui teal segment ui stacked segment">
+                    <div class="ui piled segment ui  form segment">
+                        <div class="ui ribbon teal label bottom_space left_float google_font">
+                            <h2>Chat</h2>
+                        </div>
+                        <div class="img_box">
+                            <img src="images/user3.jpg">
+                        </div>
+                        <!--Chat with all loop start from here-->
+                        <ul class="ui list chatbox_ul" ng-if="receiver === 'all' || receiver === ''">
+                            <li ng-repeat="message in chat" class="chat_li">
+                                <div class="img_box left_float">
+                                    <img src="{{message.sender === 'user1' ? 'images/user1.jpg' : message.sender === 'user2' ? 'images/user2.jpg' : 'images/user3.jpg';}}">
+                                </div>
+                                <div class="data_li teal ui pointing left label">
+                                    <h4>{{message.sender}} </h4>
+                                    <p class="text_message">{{message.text}}</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <!--Chat with all loop end here-->
+                        <!--Chat with user1 loop start from here-->
+                        <ul class="ui list chatbox_ul" ng-if="receiver === 'user1'">
+                            <li ng-repeat="message in u3ndu1" class="chat_li">
+                                <div class="img_box left_float">
+                                    <img src="{{message.sender === 'user1' ? 'images/user1.jpg' : message.sender === 'user2' ? 'images/user2.jpg' : 'images/user3.jpg';}}">
+                                </div>
+                                <div class="data_li teal ui pointing left label">
+                                    <h4>{{message.sender}} </h4>
+                                    <p class="text_message">{{message.text}}</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <!--Chat with user1 loop end here-->
+                        <!--Chat with user2 loop start from here-->
+                        <ul class="ui list chatbox_ul" ng-if="receiver === 'user2'">
+                            <li ng-repeat="message in u3ndu2" class="chat_li">
+                                <div class="img_box left_float">
+                                    <img src="{{message.sender === 'user1' ? 'images/user1.jpg' : message.sender === 'user2' ? 'images/user2.jpg' : 'images/user3.jpg';}}">
+                                </div>
+                                <div class="data_li teal ui pointing left label">
+                                    <h4>{{message.sender}} </h4>
+                                    <p class="text_message">{{message.text}}</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <!--Chat with user2 loop end here-->
+                    </div>
+                    <form ng-submit="emmitMessageChatThree()" class="ui reply form ">
+                        <div class="ui left icon input field" ng-class="{error : text.length >= 121}">
+                            <input type="text" ng-model="text" class="ui input" placeholder="chat" >
+                            <i class="chat icon teal"  ng-class="{red : text.length >= 121}"></i>
+                        </div>
+                        <select class="ui selection dropdown" ng-model="receiver" ng-change="change()">
+                            <option value="all">Group Chat</option>
+                            <option value="user1">Chat with user1</option>
+                            <option value="user2">Chat with user2</option>
+                        </select>
+                        <div class="ui teal label right_float google_font">
+                            {{text.length}} of 120
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!---- ChatThreeController End here ---->
         </div>
+        <!---- parentController start from here ---->
     </div>
 </body>
 </html>
